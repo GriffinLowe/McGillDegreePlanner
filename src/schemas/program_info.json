@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "program",
+  "description": "A schema defining academic programs, including faculty, prerequisites, and course requirements.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "title of program as described on the website"
+    },
+    "faculty": {
+      "type": "string",
+      "description": "the faculty to which the program belongs",
+      "enum": ["Science", "Arts", "Education", "Management", "Arts and Science", "Music"]
+    },
+    "credit_requirements": {
+      "type": "array",
+      "description": "contains all of the valid credit configurations that would warrant succesful completion of the degree",
+      "items": {
+        $ref "#/$defs/credit_configuration"
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "necessary courses to enter the program",
+      "items": { "$ref": "#/$defs/course_summary" }
+    },
+    "course_sections": {
+      "type": "array",
+      "description": "information for the coursework of the program",
+      "items": { "$ref": "#/$defs/course_section" }
+    },
+  },
+  "required": ["title", "faculty", "prerequisites", "course_sections", "credit_requirements"],
+  "$defs": {
+    "course_summary": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "type": "integer",
+          "description": "number of credits granted for successful completion of the course",
+          "minimum": 0,
+          "exclusiveMinimum": true
+        },
+        "Title": {
+          "type": "string",
+          "description": "full title of course"
+        },
+        "course_code": {
+          "type": "string",
+          "description": "course code assigned to the course",
+          "pattern": "^[A-Z]{4} [0-9]{4}$"
+        }
+      },
+      "required": ["credits", "Title", "course_code"]
+    },
+    "course_section": {
+      "type": "object",
+      "description": "high-level groupings of courses (i.e., required, e/o, or complimentary)",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "specifies if the course is required, e/o, or complimentary",
+          "enum": ["required", "e/o", "complimentary"]
+        },
+        "course_list": {
+          "type": "array",
+          "description": "list of course summaries in the category",
+          "items": { "$ref": "#/$defs/course_summary" }
+        },
+        "course_range": {
+          "type": "object",
+          "description": "used to describe a large range of courses based on natural language rules",
+          "properties": {
+            "rule": {
+              "type": "string",
+              "description": "the natural language rule used to construct the range"
+            },
+            "codes": {
+              "type": "array",
+              "description": "list of course code non-numeric prefixes to include",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z]{4}$"
+              },
+              "minItems": 1
+            },
+            "levels": {
+              "type": "array",
+              "description": "the levels of courses to include (e.g., 200, 300)",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            }
+          },
+          "required": ["rule", "codes", "levels"]
+        },
+        "ranged_credits": {
+          "type": "boolean",
+          "description": "if true, then min_credits = max_credits"
+        },
+        "min_credits": {
+          "type": "integer",
+          "description": "minimum number of credits to take from this section",
+          "minimum": 0
+        },
+        "max_credits": {
+          "type": "integer",
+          "description": "maximum number of credits from this section that can count toward the degree"
+        }
+      },
+      "required": ["category", "course_list", "course_range", "ranged_credits", "min_credits", "max_credits"]
+    }
+  },
+  "credit_configuration": {
+    "type": "object",
+    "description": "a possible comibination of required course exclusions that augment the number of credits required to complete the program",
+    "properties": {
+      "credits": {
+        "type": "integer",
+        "description": "the number of credits needed for succesful completion of the program with these course exemptions",
+        "minimum": 0
+      },
+      "exemptions"{
+        "type": "array",
+        "description": "a list of required courses that are excluded in this version of the program",
+        "items": {$ref "#/$defs/course_summary"}
+      },
+      "required": ["credits", "exemptions"]
+    }
+  }
+}
