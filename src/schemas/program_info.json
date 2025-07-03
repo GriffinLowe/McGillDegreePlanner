@@ -8,6 +8,10 @@
       "type": "string",
       "description": "title of program as described on the website"
     },
+    "program_description": {
+      "type": "string",
+      "description": "how the program is described on the website"
+    },
     "faculty": {
       "type": "string",
       "description": "the faculty to which the program belongs",
@@ -31,7 +35,7 @@
       "items": { "$ref": "#/$defs/course_section" }
     }
   },
-  "required": ["title", "faculty", "prerequisites", "course_sections", "credit_requirements"],
+  "required": ["title", "program_description", "faculty", "prerequisites", "course_sections", "credit_requirements"],
   "$defs": {
     "course_summary": {
       "type": "object",
