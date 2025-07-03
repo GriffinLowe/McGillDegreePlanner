@@ -95,3 +95,10 @@ def parse_program_html(soup:BeautifulSoup) -> str:
         A string containing the HTML of the program requirements section. 
         Returns an empty string if the section is not found.
     '''
+    
+    program_tag = soup.find("div", attrs={"id"="programoverviewtextcontainer", "class"="page_content tab_content"})
+
+    if not program_tag:
+        raise ValueError("Given link does not contain required information")
+
+    return program_tag.get_text()
