@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "html_wrapper",
+  "description": "contains HTML to be sent to parsing batch job in Azure AI foundry",
+  "properties": {
+    "link": {
+      "type": "string",
+      "description": "contains link used to obtain HTML"
+    },
+    "html": {
+      "type": "string",
+      "description": "contains raw HTML to be parsed by batch job"
+    }
+  },
+  "required": ["link", "html"]
+}
