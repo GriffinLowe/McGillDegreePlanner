@@ -54,6 +54,10 @@
           "type": "string",
           "description": "course code assigned to the course",
           "pattern": "^[A-Z]{4} [0-9]{4}$"
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "sub category or field assigned to the course for degree planning purposes: NA if no such assignment exists"
         }
       },
       "required": ["credits", "Title", "course_code"]
@@ -100,6 +104,21 @@
             }
           },
           "required": ["rule", "codes", "levels"]
+        },
+        "subcategory_restriction": {
+          "type": "array",
+          "description": "specifies the minimum and maximum number of credits tha  can belong to each subcategory. This is more niche and not
+          necessary to include for each section",
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              { "type": "string" },
+              { "type": "integer", "minimum": 0 },
+              { "type": "integer", "minimum": 0 }
+            ],
+            "minItems": 3,
+            "maxItems": 3
+          }
         },
         "ranged_credits": {
           "type": "boolean",
