@@ -22,12 +22,13 @@
       "description": "contains all of the valid credit configurations that would warrant successful completion of the degree",
       "items": {
         "$ref": "#/$defs/credit_configuration"
-      },
-      "program level": {
-        "type": "string",
-        "description": "determines if the program is a major, minor, liberal program, honours, etc.",
-        "enum": ["major", "minor", "liberal", "honours", "joint honours", "enriched honours", "concentration", "faculty program", "interfaculty program"]
       }
+    },
+    "program level": {
+      "type": "string",
+      "description": "determines if the program is a major, minor, liberal program, honours, etc.",
+      "enum": ["major", "minor", "liberal", "honours", "joint honours", "enriched honours", "concentration", "faculty program", "interfaculty program"]
+   
     },
     "prerequisites": {
       "type": "array",
