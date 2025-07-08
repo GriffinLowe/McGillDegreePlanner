@@ -138,7 +138,7 @@
           "description": "maximum number of credits from this section that can count toward the degree"
         }
       },
-      "required": ["category", "course_list", "course_range", "ranged_credits", "min_credits", "max_credits"]
+      "required": ["category", "course_list", "ranged_credits", "min_credits", "max_credits"]
     },
     "credit_configuration": {
       "type": "object",
