@@ -126,7 +126,7 @@
         },
         "ranged_credits": {
           "type": "boolean",
-          "description": "if true, then min_credits = max_credits"
+          "description": "if false, then min_credits = max_credits"
         },
         "min_credits": {
           "type": "integer",
