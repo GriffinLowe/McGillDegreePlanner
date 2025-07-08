@@ -24,11 +24,10 @@
         "$ref": "#/$defs/credit_configuration"
       }
     },
-    "program level": {
+    "program_level": {
       "type": "string",
       "description": "determines if the program is a major, minor, liberal program, honours, etc.",
       "enum": ["major", "minor", "liberal", "honours", "joint honours", "enriched honours", "concentration", "faculty program", "interfaculty program"]
-   
     },
     "prerequisites": {
       "type": "array",
@@ -41,7 +40,7 @@
       "items": { "$ref": "#/$defs/course_section" }
     }
   },
-  "required": ["title", "program_description", "faculty", "prerequisites", "course_sections", "program level", "credit_requirements"],
+  "required": ["title", "program_description", "faculty", "prerequisites", "course_sections", "program_level", "credit_requirements"],
   "$defs": {
     "course_summary": {
       "type": "object",
@@ -113,8 +112,7 @@
         },
         "subcategory_restriction": {
           "type": "array",
-          "description": "specifies the minimum and maximum number of credits tha  can belong to each subcategory. This is more niche and not
-          necessary to include for each section",
+          "description": "specifies the minimum and maximum number of credits that can belong to each subcategory. This is more niche and not necessary to include for each section",
           "items": {
             "type": "array",
             "prefixItems": [
